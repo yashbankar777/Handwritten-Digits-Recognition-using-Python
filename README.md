@@ -1,133 +1,155 @@
-🖌️ AI Digit Recognizer
+# 🎯 MNIST Digit Recognizer
 
-An interactive handwritten digit recognition system built using Keras (TensorFlow backend) and Tkinter GUI.
-The model is trained on the MNIST dataset using a Convolutional Neural Network (CNN) and deployed as a simple desktop application where you can draw digits (0–9) and get instant predictions with confidence scores.
+A deep learning project that trains a Convolutional Neural Network to recognize handwritten digits (0-9) using the MNIST dataset, complete with an interactive GUI for real-time digit recognition.
 
-🚀 Features
+## 🚀 Features
 
-✅ CNN-based classifier trained on MNIST dataset
+- **CNN Model Training**: Built with Keras/TensorFlow for high accuracy digit recognition
+- **Interactive GUI**: Draw digits with your mouse and get instant predictions
+- **Real-time Recognition**: Live prediction with confidence scores
+- **Modern UI Design**: Clean, user-friendly interface with visual feedback
+- **High Accuracy**: Achieves excellent performance on the MNIST test set
 
-✅ Tkinter GUI with a canvas to draw digits
+## 📋 Prerequisites
 
-✅ Displays predicted digit 🎯 and confidence percentage
+```bash
+pip install keras tensorflow numpy pillow tkinter
+```
 
-✅ Buttons to recognize or clear drawings
+## 🏗️ Project Structure
 
-✅ Color-coded confidence levels (green = high, orange = medium, red = low)
+The project consists of two main components:
 
-📂 Project Structure
-📦 AI-Digit-Recognizer
- ┣ 📜 mnist.h5           # Trained CNN model (saved after training)
- ┣ 📜 train_model.py     # Script for training & saving the model
- ┣ 📜 gui_app.py         # Tkinter GUI for digit recognition
- ┣ 📜 README.md          # Project documentation
+### 1. Model Training (`MODEL` section)
+- Loads and preprocesses the MNIST dataset
+- Builds a CNN with Conv2D, MaxPooling, and Dropout layers
+- Trains the model with Adam optimizer
+- Saves the trained model as `mnist.h5`
 
-🧠 Model Architecture
+### 2. GUI Application (`GUI` section)
+- Interactive drawing canvas for digit input
+- Real-time prediction display
+- Confidence score visualization
+- Clear and recognize functionality
 
-The CNN is built using Keras Sequential API:
+## 🎮 How to Use
 
-Conv2D (32 filters, 3x3, ReLU)
+### Training the Model
 
-Conv2D (64 filters, 3x3, ReLU)
+1. Run the model training section to create `mnist.h5`:
+```python
+# The training code will automatically:
+# - Download MNIST dataset
+# - Preprocess the data
+# - Train the CNN model
+# - Save as 'mnist.h5'
+```
 
-MaxPooling2D (2x2)
+### Running the GUI
 
-Dropout (25%)
+1. Ensure `mnist.h5` exists in your project directory
+2. Run the GUI section:
+```python
+# This will launch the interactive application
+```
 
-Flatten
+3. **Draw a digit** (0-9) on the white canvas
+4. Click **🧠 RECOGNIZE** to get the prediction
+5. Use **🗑️ CLEAR** to start over
 
-Dense (256, ReLU)
+## 🧠 Model Architecture
 
-Dropout (50%)
+```
+Sequential Model:
+├── Conv2D(32, 3x3, ReLU)
+├── Conv2D(64, 3x3, ReLU)
+├── MaxPooling2D(2x2)
+├── Dropout(0.25)
+├── Flatten()
+├── Dense(256, ReLU)
+├── Dropout(0.5)
+└── Dense(10, Softmax)
+```
 
-Dense (10, Softmax)
+**Training Parameters:**
+- Batch Size: 128
+- Epochs: 12
+- Optimizer: Adam
+- Loss: Categorical Crossentropy
 
-Optimizer: Adam
-Loss: Categorical Crossentropy
-Metrics: Accuracy
+## 🎨 GUI Features
 
-📊 Training
+- **🎯 Smart Drawing**: 15px brush size optimized for digit recognition
+- **🔮 Live Predictions**: Instant feedback with confidence percentages
+- **🌈 Color-coded Confidence**: 
+  - Green (>80%): High confidence
+  - Orange (60-80%): Medium confidence  
+  - Red (<60%): Low confidence
+- **📱 Fixed Canvas**: 280x280 pixels, automatically resized to 28x28 for model input
 
-Dataset: MNIST (60,000 training, 10,000 test samples)
+## 📊 Performance
 
-Epochs: 12
+The model typically achieves:
+- **Training Accuracy**: ~99%
+- **Test Accuracy**: ~98%+
+- **Real-time Inference**: Near-instantaneous predictions
 
-Batch size: 128
+## 🛠️ Technical Details
 
-Final Accuracy: ~99% on training, ~98% on test set
+### Data Preprocessing
+- Reshapes images to (28, 28, 1) format
+- Normalizes pixel values to [0, 1] range
+- Converts labels to categorical format
 
-🖥️ GUI Preview
+### Image Processing (GUI)
+- Converts canvas drawings to grayscale
+- Resizes to 28x28 pixels using LANCZOS resampling
+- Inverts colors (white digits on black background for MNIST compatibility)
+- Normalizes pixel values for model input
 
-🎯 Main Window:
+## 🔧 Customization
 
-Canvas to draw your digit
+You can modify various parameters:
 
-Prediction box with confidence score
+```python
+# Model parameters
+batch_size = 128    # Adjust batch size
+epochs = 12         # Training epochs
+learning_rate = 0.001  # Adam optimizer learning rate
 
-Buttons to recognize or clear
+# GUI parameters
+canvas_size = 280   # Drawing canvas size
+brush_width = 15    # Drawing brush thickness
+```
 
-(Insert screenshot here if available, e.g., ![GUI Screenshot](screenshot.png))
+## 📝 File Output
 
-⚡ Installation & Usage
+- `mnist.h5`: Trained model file (required for GUI)
+- Training logs and accuracy metrics printed to console
 
-Clone the repository
+## 🎯 Use Cases
 
-git clone https://github.com/your-username/AI-Digit-Recognizer.git
-cd AI-Digit-Recognizer
+- **Educational**: Learn CNN architectures and digit recognition
+- **Prototyping**: Quick handwriting recognition demos
+- **Research**: Baseline model for digit classification experiments
+- **Interactive Learning**: Visual demonstration of deep learning concepts
 
+## 🚨 Troubleshooting
 
-Install dependencies
+**Model not found error**: Ensure you've run the training section first to generate `mnist.h5`
 
-pip install tensorflow keras pillow numpy
+**Poor recognition accuracy**: Try drawing larger, centered digits with clear strokes
 
+**GUI not responding**: Check that all dependencies are properly installed
 
-Train the model (optional, model already provided)
+## 📄 License
 
-python train_model.py
+This project is open source and available under the [MIT License](LICENSE).
 
+## 🤝 Contributing
 
-Run the GUI
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](../../issues).
 
-python gui_app.py
+---
 
-🎯 Example
-
-Draw a digit on the canvas
-
-Click 🧠 RECOGNIZE
-
-Get prediction & confidence score instantly
-
-Confidence colors:
-
-🟢 > 80% → High confidence
-
-🟠 60–80% → Medium confidence
-
-🔴 < 60% → Low confidence
-
-📌 Requirements
-
-Python 3.7+
-
-TensorFlow / Keras
-
-NumPy
-
-Pillow
-
-Tkinter (pre-installed with Python)
-
-🏆 Future Improvements
-
-Add CNN training visualization (accuracy/loss plots)
-
-Save drawing history & predictions
-
-Export predictions as JSON/CSV
-
-Extend to A–Z handwritten character recognition
-
-🤝 Contributing
-
-Contributions are welcome! Please fork this repo, make changes, and submit a PR.
+⭐ **Star this repository if you found it helpful!**
